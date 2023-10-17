@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import NavigationBar from "./constants/NavBar"
+import NavigationBar from "./components/NavBar"
 import './App.css'
 
 function App() {
