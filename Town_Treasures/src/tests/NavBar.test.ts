@@ -24,7 +24,7 @@
 //some fucking bullshit
 
 import {render, screen, cleanup} from '@testing-library/react';
-import NavBar from '../constants/NavBar';
+import NavBar from '../components/NavBar';
 
 test("Should render Navbar component", () => {
     render(<Navbar/>)
