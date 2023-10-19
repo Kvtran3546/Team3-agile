@@ -1,0 +1,34 @@
+.search {
+    width: 500px;
+    height: 40px;
+    position: relative;
+    background-color: white;
+    color: #000000;
+    padding: 10px;
+    border-radius: 0px;
+}
+.search:active {
+    border-radius: 0px;
+}
+
+.search_container {
+    vertical-align: center;
+    display: inline-flex;
+    padding: 10px;
+}
+
+.button {
+    height: 40px;
+    width: 50px;
+    border-radius: 0px;
+    background-color: #cecece;
+    border-width: 0px;
+}
+.button:active {
+    border-radius: 0px;
+    background-color: #616161;
+}
+
+img {
+    width:20px
+}
