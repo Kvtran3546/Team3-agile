@@ -1,27 +1,36 @@
-# React + TypeScript + Vite
+# Team3-agile
+Agile team
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+File Structure :
+Front end codes are all in src file
 
-Currently, two official plugins are available:
+Asset folder :
+- Images, SVG, anything that is regarding to assets.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Pages folder :
+- Contains typescript files that return each website page.
+- EX : homepage, contactus, info, etc
 
-## Expanding the ESLint configuration
+Constants folder :
+- Folder contains objects that are lists that could be used to map variables to html/script elements.
+- Ex: a list of navbar title and corresponding link to page.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Components folder :
+- Folder contains script files that return commonly used html components.
+- Ex: Buttons, contact forms, infoCards, etc.
 
-- Configure the top-level `parserOptions` property like this:
+All pages will be displayed by the app.tsx file.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+How to start coding: 
+- clone the repository
+- cd into Town_Treasures
+- open terminal
+- Enter "yarn install"
+- Enter "yarn dev" to deploy the website locally.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Making changes:
+- Never work on the master/main branch
+- Checkout new branch, name it whatever you are working on
+- Add, commit, and push into that sub working branch.
+- Create pull request when you feel like the objective is complete.
+- Two members will review and approve the merge.

@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>TOWN TREASURES</h1>
+        <h1>TOWN_TREASURES</h1>
       </div>
     </>
   )
