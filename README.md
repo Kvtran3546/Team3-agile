@@ -34,3 +34,4 @@ Making changes:
 - Add, commit, and push into that sub working branch.
 - Create pull request when you feel like the objective is complete.
 - Two members will review and approve the merge.
+
