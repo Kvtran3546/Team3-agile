@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {Home, Explore, Community, ContactUs, SubmitSpot} from './pages/';
 import {Navbar} from './components';
+import SearchBar from './components/SearchBar';
 // ... import other pages as well
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div className='w-[100%]'>
       <Router className="w-full">
         <Navbar/>
+        <SearchBar/>
         <Routes>
           <Route path="/explore" element={<Explore/>} />
           {/* Add routes for other pages similarly */}
