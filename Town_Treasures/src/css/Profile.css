@@ -1,0 +1,86 @@
+.profileContainer {
+    width : 30%;
+    margin : 10px;
+    text-align: center;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    justify-content : center;
+    background-color: whitesmoke;
+}
+
+.profileImage {
+    width : 100px;
+    border-color : black;
+    border-width : 1px;
+}
+
+.editProfileButton {
+    color : white;
+    padding : 5px 20px 5px 20px;
+    background-color : green;
+    border-radius : 10px;
+}
+
+.profileInfoContainer {
+    height : 300px;
+    width : 100%;
+    border-bottom-width : 1px;
+    border-color : black;
+    text-align: center;
+    display : flex;
+    flex-direction : column;
+    align-items : center;
+    justify-content : space-between;
+    background-color : whitesmoke;
+    padding : 40px;
+}
+
+.linkList {
+    padding : 30px;
+    text-align : left;
+    width : 100%;
+    border-bottom-width : 1px;
+    border-color: black;
+}
+
+.header {
+    font-weight : bold;
+    font-size : 20;
+}
+
+li {
+    margin : 10px;
+}
+
+.contentDisplay {
+    width : 98%;
+    margin : 10px;
+    text-align : center;
+    background-color : whitesmoke;
+    padding: 10px;
+}
+
+.contentDisplayContainer {
+    display : flex;
+    width : 70%;
+    height : 350px;
+    flex-direction : column;
+}
+
+hr {
+    border-top : 1px solid black;
+}
+
+.contentHeader {
+    font-size : 30;
+    font-weight : bold;
+    margin : 10px;
+}
+
+.contentDisplayContent {
+    height : 200px;
+    justify-content : center;
+    align-items : center;
+    
+}
