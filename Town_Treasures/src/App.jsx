@@ -5,8 +5,8 @@ import {Navbar} from './components';
 
 function App() {
   return (
-    <div>
-      <Router>
+    <div className='w-[100%]'>
+      <Router className="w-full">
         <Navbar/>
         <Routes>
           <Route path="/explore" element={<Explore/>} />

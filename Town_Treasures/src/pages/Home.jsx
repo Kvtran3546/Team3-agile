@@ -3,7 +3,7 @@ import {Navbar} from '../components'
 const Home = () => {
   return (
     <div>
-        <h1 className='text-white'>Home</h1>
+        <h1 className='text-black'>Home</h1>
     </div>
   )
 }

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { navLinks } from "../constants";
-import {menu, close} from "../assets";
+import {menu, close, Town_Treasures_Logo} from "../assets";
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className='w-full flex py-6 justify-between items-center navbar'>
-
+    <nav className='w-[100%] flex py-6 justify-between items-center navbar h-[100px] bg-[#02874D] px-5'>
+      <img src={Town_Treasures_Logo} alt="logo" className="flex object-contain w-[150px] h-[150px]"/>
       <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
         {navLinks.map((nav, index) => (
           <li
