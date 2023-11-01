@@ -10,7 +10,6 @@ function App() {
     <div className='w-[100%]'>
       <Router className="w-full">
         <Navbar/>
-        <SearchBar/>
         <Routes>
           <Route path="/explore" element={<Explore/>} />
           {/* Add routes for other pages similarly */}
