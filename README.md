@@ -25,8 +25,8 @@ How to start coding:
 - clone the repository
 - open terminal
 - cd into Town_Treasures
-- Enter "yarn install"
-- Enter "yarn dev" to deploy the website locally.
+- Enter "yarn install" or "npm install"
+- Enter "yarn dev" or "npm run dev" to deploy the website locally.
 
 Making changes:
 - Never work on the master/main branch
