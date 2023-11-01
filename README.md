@@ -23,8 +23,8 @@ All pages will be displayed by the app.tsx file.
 
 How to start coding: 
 - clone the repository
-- cd into Town_Treasures
 - open terminal
+- cd into Town_Treasures
 - Enter "yarn install"
 - Enter "yarn dev" to deploy the website locally.
 
