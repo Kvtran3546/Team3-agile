@@ -1,0 +1,58 @@
+.submitContainer {
+    background-color: rgb(46, 150, 86);
+    margin : 50px;
+    padding: 75px;
+    border-radius : 20px;
+    
+}
+
+.fieldInput {
+    width: 100%;
+    padding : 10px;
+    margin : 15px 0px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+form {
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.submitButton {
+    background-color: white;
+    padding: 10px 30px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.cityState {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+label {
+    color: rgb(46, 150, 86);
+}
+
+.imageButton {
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width:40px;
+    height:40px;
+}
