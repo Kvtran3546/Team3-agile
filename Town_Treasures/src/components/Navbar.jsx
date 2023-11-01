@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react";
 import { navLinks } from "../constants";
 import {menu, close, Town_Treasures_Logo} from "../assets";
