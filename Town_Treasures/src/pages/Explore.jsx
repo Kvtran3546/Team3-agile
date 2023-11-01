@@ -1,10 +1,11 @@
 import React from 'react'
-import { SubmitButton } from '../components'
+import { SubmitButton, SearchBar } from '../components'
 
 const Explore = () => {
   return (
     <div>
         <h1 className='text-black'>Explore</h1>
+        <SearchBar/>
         <SubmitButton/>
     </div>
   )

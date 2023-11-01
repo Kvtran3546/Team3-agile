@@ -1,5 +1,6 @@
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {Home, Explore, Community, ContactUs, SubmitSpot} from './pages/';
+import {Home, Explore, Community, ContactUs, SubmitSpot, Profile} from './pages/';
 import {Navbar} from './components';
 import SearchBar from './components/SearchBar';
 // ... import other pages as well
@@ -9,7 +10,6 @@ function App() {
     <div className='w-[100%]'>
       <Router className="w-full">
         <Navbar/>
-        <SearchBar/>
         <Routes>
           <Route path="/explore" element={<Explore/>} />
           {/* Add routes for other pages similarly */}
@@ -18,6 +18,7 @@ function App() {
           {/* Default route, typically Home */}
           <Route path="/home" element={<Home />} />
           <Route path="/submitspot" element={<SubmitSpot />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
     </div>
