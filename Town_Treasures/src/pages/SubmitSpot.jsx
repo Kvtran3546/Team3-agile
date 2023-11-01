@@ -63,7 +63,7 @@ function SubmitSpot() {
                             name='state'
                             onChange={handleChange}
                         >
-                            {abbreviations.map((item) => <option value={item}>{item}</option>)}
+                            {abbreviations.map((item) => <option value={item} key={item}>{item}</option>)}
                         </select>
                     </div>
                     <textarea
