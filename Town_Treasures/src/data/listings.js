@@ -1,11 +1,3 @@
-/*******************************************************************************
- * Name        : recipes.js (data)
- * Author      : Brandon Leung
- * Date        : April 20, 2069
- * Description : Structure of the Bong Water
- * Pledge      : I pledge my honor that I have abided by the Stevens Honor System.
- ******************************************************************************/
-// This data file should export all functions using the ES6 standard as shown in the lecture code
 import {listings} from '../config/mongoCollections.js';
 import {ObjectId} from 'mongodb';
 import * as helpers from '../helpers.js';
