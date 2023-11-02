@@ -1,6 +1,7 @@
 import React from "react";
 import  '../css/Profile.css';
 import { Link } from 'react-router-dom';
+import { SubmitButton } from "../components";
 
 export default function Profile() {
     return (<div style={{flexDirection : "row", display : "flex"}}>
@@ -42,7 +43,7 @@ export default function Profile() {
                 <div className="contentDisplayContent">
                     <text>You have no recent activities.</text>
                 </div>
-                <button className="editProfileButton">Submit a Post</button>
+                <SubmitButton />
             </div>
 
         </div>

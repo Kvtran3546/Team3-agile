@@ -4,7 +4,6 @@ import ContactUs from "./ContactUs";
 import Community from "./Community";
 import SubmitSpot from "./SubmitSpot";
 import Profile from "./Profile";
-import Listings from "./Listings"
 
 
 export {
@@ -14,5 +13,4 @@ export {
     Community,
     SubmitSpot,
     Profile,
-    Listings
 }
