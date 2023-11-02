@@ -21,7 +21,7 @@ const Listings = () => {
         {
             image: 'https://scontent-lga3-1.xx.fbcdn.net/v/t39.30808-6/302055401_408331531387955_90279840008017033_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=nJHhUd6X2okAX8RsoVb&_nc_ht=scontent-lga3-1.xx&oh=00_AfB3hSgIw3SdnISoXaIeHdnqTgRbxYZwa7tjfS2X6_GUEg&oe=65489945',
             title: 'Vitos Italian Deli',
-            address: '804 Washington St... I think',
+            address: '806 Washington St',
           }
     ]
     return (
