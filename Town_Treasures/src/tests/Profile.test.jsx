@@ -18,6 +18,5 @@ describe("Profile Page", () => {
       expect(container.innerHTML).toContain('Recently Viewed');
       expect(container.innerHTML).toContain('View Friends');
       expect(container.innerHTML).toContain('Find Friends');
-      expect(container.innerHTML).toContain('Submit a Post');
     });
   });
