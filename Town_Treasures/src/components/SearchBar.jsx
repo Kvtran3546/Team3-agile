@@ -58,7 +58,7 @@ function SearchBar(props) {
 
     // return search bar, input + button
     return (
-        <div className='search_container'>
+        <div className='search_container z-50'>
             <input
                 className='search'
                 placeholder='Search for Cities, States, and more'
