@@ -17,7 +17,7 @@ router
       if (output == null){
         res.status(500).json({error: "Internal Server Error"});
       }
-      //delete output.password;
+      delete output.password;
       res.json(output);
     } catch (e) {
       res.status(400).json({error: e});
@@ -42,7 +42,7 @@ router
       }
       req.session.user = output.username;
       req.session.userId = output._id;
-      //delete output.password;
+      delete output.password;
       res.json(output);
     } catch (e){
       res.status(400).json({error: e});

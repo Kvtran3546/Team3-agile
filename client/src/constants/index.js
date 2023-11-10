@@ -10,17 +10,25 @@ export const navLinks = [
         title : 'Explore',
     },
     {
-        id : "community",
-        title : 'Community',
-    },
-    {
         id : "contactus",
         title : 'Contact Us',
     },
     {
         id : "profile",
         title : 'Profile',
-    }
+    },
+    {
+        id : "login",
+        title : 'Login',
+    },
+    {
+        id : "register",
+        title : 'Register',
+    },
+    {
+        id : "logout",
+        title : 'Logout',
+    },
 ]
 
 export const listingData = [

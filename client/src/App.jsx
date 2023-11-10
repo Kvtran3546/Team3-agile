@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {Home, Explore, Community, ContactUs, SubmitSpot, Profile} from './pages/';
+import {Home, Explore, Community, ContactUs, SubmitSpot, Profile, Login, Register} from './pages/';
 import {Navbar} from './components';
 import SearchBar from './components/SearchBar';
 // ... import other pages as well
@@ -19,6 +19,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/submitspot" element={<SubmitSpot />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/register" element={<Login />} />
+          <Route path="/login" element={<Register />} />
         </Routes>
       </Router>
     </div>

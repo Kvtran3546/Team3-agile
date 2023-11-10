@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <nav className='w-[100%] flex py-6 justify-between items-center navbar h-[100px] bg-[#02874D] px-5'>
-      <img src={Town_Treasures_Logo} alt="logo" className="flex object-contain w-[150px] h-[150px]"/> // Town Treasures logo
+      <img src={Town_Treasures_Logo} alt="logo" className="flex object-contain w-[150px] h-[150px]"/>
 
       {/* Navigation links for larger screens */}
       <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
