@@ -1,8 +1,11 @@
-import {listings} from '../config/mongoCollections.js';
-import {ObjectId} from 'mongodb';
-import * as helpers from '../helpers.js';
+// import {listings} from '../config/mongoCollections.js';
+// import {ObjectId} from 'mongodb';
+//import * as helpers from '../../src/helpers.js';
+const listings = require("../config/mongoCollections.js");
+const ObjectId = require("mongodb");
+const helpers = require("../helpers.js");
 
-export const create = async (title, address, city, state, description, imageURL) => {
+const create = async (title, address, city, state, description, imageURL) => {
 	title = helpers.isValidString(title, "Title");
 	address = helpers.isValidString(title, "Address");
 	city = helpers.isValidString(title, "City");
@@ -27,7 +30,7 @@ export const create = async (title, address, city, state, description, imageURL)
 	return listing;
 };
 
-export const getAll = async () => {
+const getAll = async () => {
 	const listingsCollection = await listings();
 	let listingList = await listingsCollection.find({}, {}).toArray();
 	if (!listingList) {throw new Error("Error: was unable to get all listings.")}
@@ -38,7 +41,7 @@ export const getAll = async () => {
 	return listingList;
 };
 
-export const get = async (id) => {
+const get = async (id) => {
 	id = helpers.isValidString(id);
 	if (!ObjectId.isValid(id)) {throw new Error("Error: invalid object ID.")}
     const listingsCollection = await listings();
@@ -48,7 +51,7 @@ export const get = async (id) => {
     return listing;
 };
 
-export const remove = async (id) => {
+const remove = async (id) => {
 	id = helpers.isValidString(id);
 	if (!ObjectId.isValid(id)) {throw new Error("Error: invalid object ID.")}
 	const listingsCollection = await listings();
@@ -57,7 +60,7 @@ export const remove = async (id) => {
 	return `${deletionInfo.value.name} has been successfully deleted!`;
 };
 
-export const update = async (id, updatedInfo) => {
+const update = async (id, updatedInfo) => {
 	id = helpers.isValidString(id);
 	if (!ObjectId.isValid(id)) {throw new Error("Error: invalid object ID.")}
 	const updatedListingInfo = {};
@@ -112,3 +115,11 @@ export const update = async (id, updatedInfo) => {
 	updatedListing.value._id = updatedListing.value._id.toString();
 		return updatedListing.value;
 };
+
+module.exports = {
+	create,
+	getAll,
+	get,
+	remove,
+	update
+}

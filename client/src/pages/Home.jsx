@@ -2,7 +2,7 @@ import React from 'react'
 import {Navbar, SearchBar, SpecialButton} from '../components'
 import { mainimg } from '../assets'
 import { special_buttons } from '../constants'
-import 'leaflet/dist/leaflet.css';
+//import 'leaflet/dist/leaflet.css';
 const Home = () => {
   return (
     <div className='flex flex-col w-full justify-center items-center'>
