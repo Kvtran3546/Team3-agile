@@ -1,17 +1,15 @@
 import React from 'react';
 import { useState } from "react";
-import { navLinks } from "../constants"; // Import navigation links
-import { menu, close, Town_Treasures_Logo } from "../assets"; // Import menu, close icon, and logo
+import { navLinks } from "../constants";
+import {menu, close, Town_Treasures_Logo} from "../assets";
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const [toggle, setToggle] = useState(false); // State to manage mobile menu toggle
+  const [toggle, setToggle] = useState(false);
 
   return (
     <nav className='w-[100%] flex py-6 justify-between items-center navbar h-[100px] bg-[#02874D] px-5'>
-      <img src={Town_Treasures_Logo} alt="logo" className="flex object-contain w-[150px] h-[150px]"/> // Town Treasures logo
-
-      {/* Navigation links for larger screens */}
+      <img src={Town_Treasures_Logo} alt="logo" className="flex object-contain w-[150px] h-[150px]"/>
       <ul className='list-none sm:flex hidden justify-end items-center flex-1'>
         {navLinks.map((nav, index) => (
           <li
@@ -26,16 +24,14 @@ const Navbar = () => {
         ))}
       </ul>
 
-      {/* Mobile menu toggle button */}
       <div className='sm:hidden flex flex-1 justify-end items-center'>
         <img
           src={toggle ? close : menu}
           alt='menu'
           className='w-[28px] h-[28px] object-contain'
-          onClick={() => setToggle((prev) => !prev)} // Toggle menu on click
+          onClick={() => setToggle((prev) => !prev)}
         />
 
-        {/* Mobile menu with navigation links */}
         <div
           className={`${
             toggle ? "flex" : "hidden"
@@ -52,7 +48,7 @@ const Navbar = () => {
               >
                 <Link to={`/${nav.id}`}>{nav.title}</Link>
               </li>
-            ))}
+              ))}
           </ul>
         </div>
       </div>
