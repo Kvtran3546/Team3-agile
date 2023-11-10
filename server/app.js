@@ -25,6 +25,15 @@ app.use(async (req, res, next) => {
     next();
 })
 
+app.use("/protected", (req, res, next) =>{
+    if (!req.session.user){
+        res.status(403).json({ error: 'Not logged in' });
+        return;
+    } else{
+        next();
+    }
+});
+
 configRoutes(app);
 
 app.listen(3000, () =>{
