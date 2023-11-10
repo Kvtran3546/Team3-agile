@@ -11,10 +11,18 @@ const Register = () => {
     const [password, setPassword] = useState('');
 
     // Handle form submission
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Sign Up Submitted', { email, username, password });
-        // Here you would typically make a request to your backend to create the new user
+        try {
+            const response = await axios.post('mongodb://localhost:27017/register', {
+                username: username,
+                password: password
+            });
+            console.log('Response:', response.data);
+            // Redirect to login or another page upon successful registration
+        } catch (error) {
+            console.error('Error during registration:', error.response ? error.response.data : error.message);
+        }
     };
 
     return (
