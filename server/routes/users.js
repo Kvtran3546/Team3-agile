@@ -16,6 +16,7 @@ router
       let output = await users.createUser(info.username, info.password);
       if (output == null){
         res.status(500).json({error: "Internal Server Error"});
+        return;
       }
       delete output.password;
       res.json(output);
