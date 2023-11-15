@@ -5,13 +5,14 @@ const listings = require("../config/mongoCollections.js");
 const ObjectId = require("mongodb");
 const helpers = require("../helpers.js");
 
-const create = async (title, address, city, state, description, imageURL) => {
+const createPost = async (title, address, city, state, description, imageURL) => {
+	console.log("got in");
 	title = helpers.isValidString(title, "Title");
-	address = helpers.isValidString(title, "Address");
-	city = helpers.isValidString(title, "City");
-	state = helpers.isValidString(title, "State");
-	description = helpers.isValidString(title, "Description");
-	imageURL = helpers.isValidString(title, "Image URL");
+	address = helpers.isValidString(address, "Address");
+	city = helpers.isValidString(city, "City");
+	state = helpers.isValidString(state, "State");
+	description = helpers.isValidString(description, "Description");
+	//check if imageURLs are right
 
 	let newListing= {
 		title: title,
@@ -117,7 +118,7 @@ const update = async (id, updatedInfo) => {
 };
 
 module.exports = {
-	create,
+	createPost,
 	getAll,
 	get,
 	remove,

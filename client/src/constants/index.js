@@ -25,10 +25,6 @@ export const navLinks = [
         id : "register",
         title : 'Register',
     },
-    {
-        id : "logout",
-        title : 'Logout',
-    },
 ]
 
 export const listingData = [

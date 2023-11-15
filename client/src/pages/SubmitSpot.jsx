@@ -4,6 +4,7 @@ import {Navbar} from '../components'
 import {Form} from 'react-bootstrap';
 import '../css/SubmitSpot.css';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import Camera from '../assets/camera.png';
 
 
@@ -16,16 +17,29 @@ const abbreviations = [
 function SubmitSpot() {
     const [selectedFile, setSelectedFile] = useState();
     const [inputs, setInputs] = useState({});
-
+    const navigate = useNavigate();
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({...values, [name]: value}))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(inputs);
+        console.log(inputs)
+        try {
+            const response = await axios.post('http://localhost:3000/listings/submitspot', {
+                title: inputs.title,
+                address: inputs.address,
+                city: inputs.city,
+                state : inputs.state,
+                description: inputs.description,
+                imageURL: inputs.imageURL
+            });
+            navigate('/home');
+        } catch (error) {
+            console.error('Error during submission:', error.response ? error.response.data : error.message);
+        }
     }
 
     return (
@@ -36,8 +50,8 @@ function SubmitSpot() {
                         className='fieldInput'
                         placeholder='Location Title'
                         type="text" 
-                        name="location" 
-                        value={inputs.location || ""} 
+                        name="title" 
+                        value={inputs.title || ""} 
                         onChange={handleChange}
                     />
                     <input

@@ -1,4 +1,3 @@
-//require express, express router and bcrypt as shown in lecture code
 const express = require("express");
 const router = express.Router();
 const data = require("../data");
@@ -9,13 +8,14 @@ router
   .post(async (req, res) => {
     //code here for POST
     try{
-      //const {usernameInput, passwordInput} = req.body;
       let info = req.body;
+      if (!info.email) throw "There needs to be an email";
       if (!info.username) throw "There needs to be a username";
       if (!info.password) throw "There needs to be a password";
-      let output = await users.createUser(info.username, info.password);
+      let output = await users.createUser(info.email, info.username, info.password);
       if (output == null){
         res.status(500).json({error: "Internal Server Error"});
+        return;
       }
       delete output.password;
       res.json(output);
@@ -34,9 +34,9 @@ router
       	res.status(401).json({error: "You are already logged in"});
       	return;
       }
-      if (!info.username) throw "There needs to be a username";
+      if (!info.username) throw "There needs to be an email or username";
       if (!info.password) throw "There needs to be a password";
-      let output = await users.checkUser(info.username, info.password);
+      let output = await users.checkLogin(info.username, info.password);
       if (output==null){
       	res.status(500).json({error: "Internal Server Error"});
       }

@@ -1,11 +1,25 @@
 import React from "react";
 import  '../css/Profile.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SubmitButton } from "../components";
+import axios from "axios";
+
+
 
 export default function Profile() {
+    const navigate = useNavigate(); // Initialize useNavigate
+
+    const handleSubmit = async () => {
+        try {
+            await axios.post('http://localhost:3000/users/logout'); // Replace with your server URL
+            // Redirect to home or login page after successful logout
+            navigate('/login'); // Update this to the path you want to redirect to after logout
+        } catch (error) {
+            console.error('Logout failed:', error.response ? error.response.data : error.message);
+        }
+    };
     return (<div style={{flexDirection : "row", display : "flex"}}>
-        <div className="profileContainer">
+        <div className="profileContainer pb-10">
             <div className="profileInfoContainer">
                 <img className="profileImage" src={"https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png"}/>
                 <h1>username</h1>
@@ -20,13 +34,14 @@ export default function Profile() {
                     <li><Link to={`/profile/drafts`}>Drafts</Link></li>
                 </ul>
             </div>
-            <div className="linkList">
+            <div className="linkList mb-10">
                 <h1 className="header">Friends</h1>
                 <ul>
                     <li><Link to={`/profile/view_friends`}>View Friends</Link></li>
                     <li><Link to={`/profile/find_friends`}>Find Friends</Link></li>
                 </ul>
             </div>
+            <button className="editProfileButton" onClick={handleSubmit}>Log out</button>
         </div>
         <div className="contentDisplayContainer">
             <div className="contentDisplay">
