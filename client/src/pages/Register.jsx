@@ -3,23 +3,23 @@ import { Navbar } from '../components';
 import { Form } from 'react-bootstrap';
 import '../css/SubmitSpot.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate();
     // Handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:3000/register', {
+                email: email,
                 username: username,
                 password: password
             });
-            console.log('Response:', response.data);
-            // Redirect to login or another page upon successful registration
+            navigate('/home');
         } catch (error) {
             console.error('Error during registration:', error.response ? error.response.data : error.message);
         }

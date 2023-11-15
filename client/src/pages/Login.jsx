@@ -4,16 +4,26 @@ import {Navbar} from '../components'
 import {Form} from 'react-bootstrap';
 import '../css/SubmitSpot.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [username, setusername] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate();
     // Handle form submission
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Login Submitted', { email, password });
+        console.log('Login Submitted', { username, password });
         // Here you would typically make a request to your backend to validate the user credentials
+        try {
+            const response = await axios.post('http://localhost:3000/users/login', {
+                username: username,
+                password: password
+            });
+            console.log(response);
+            navigate('/home');
+        } catch (error) {
+            console.error('Error during login:', error.response ? error.response.data : error.message);
+        }
     };
     
   return (
@@ -21,15 +31,15 @@ const Login = () => {
         <form onSubmit={handleSubmit} className="flex flex-col bg-white py-10 w-[440px] h-fit px-10 rounded-md">
             <p className='w-full mb-10'>By signing in, you agree to Terms of Use and Privacy Policy</p>
             <div className='flex flex-col w-[90%] mb-5'>
-                <label htmlFor="email" className='text-[15px] text-gray-500 font-normal leading-tight uppercase py-2'>Email or Username</label>
+                <label htmlFor="username" className='text-[15px] text-gray-500 font-normal leading-tight uppercase py-2'>Username</label>
                 <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="username"
+                    id="username"
+                    value={username}
+                    onChange={(e) => setusername(e.target.value)}
                     required
                     className='border-[1px] border-gray-400 rounded-sm px-[10px] py-[8px]'
-                    placeholder='Enter your email address here'
+                    placeholder='Enter your username address here'
                 />
             </div>
             <div className='flex flex-col w-[90%] mb-10'>
