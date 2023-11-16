@@ -1,8 +1,33 @@
-# React + Vite
+File Structure : Front end codes are all in src file
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Asset folder :
 
-Currently, two official plugins are available:
+Images, SVG, anything that is regarding to assets.
+Pages folder :
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Contains typescript files that return each website page.
+EX : homepage, contactus, info, etc
+Constants folder :
+
+Folder contains objects that are lists that could be used to map variables to html/script elements.
+Ex: a list of navbar title and corresponding link to page.
+Components folder :
+
+Folder contains script files that return commonly used html components.
+Ex: Buttons, contact forms, infoCards, etc.
+All pages will be displayed by the app.tsx file.
+
+How to start coding:
+
+clone the repository
+open terminal
+cd into Town_Treasures
+Enter "yarn install" or "npm install"
+Enter "yarn dev" or "npm run dev" to deploy the website locally.
+Making changes:
+
+Never work on the master/main branch
+Checkout new branch, name it whatever you are working on
+Add, commit, and push into that sub working branch.
+Create pull request when you feel like the objective is complete.
+Two members will review and approve the merge.
