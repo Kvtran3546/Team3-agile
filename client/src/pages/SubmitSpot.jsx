@@ -1,11 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
-import {Navbar} from '../components'
-import {Form} from 'react-bootstrap';
 import '../css/SubmitSpot.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import Camera from '../assets/camera.png';
 
 
 const abbreviations = [
@@ -29,7 +26,7 @@ function SubmitSpot() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(inputs)
+        console.log(inputs);
         try {
             const response = await axios.post('http://localhost:3000/listings/submitspot', {
                 title: inputs.title,

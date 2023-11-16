@@ -1,0 +1,48 @@
+img {
+    width: 500px;
+    border-radius: 10px;
+    padding-right: 20px;
+}
+
+.title_header {
+    font: 40px Arial, sans-serif;
+    font-weight: bold;
+    margin: 10px;
+    color: #02874D;
+}
+
+.container {
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.image_info {
+    display: flex;
+    flex-flow: row;
+    padding: 20px;
+    text-align: left;
+}
+
+hr {
+    border: 1px solid #E2E2E2;
+}
+
+p {
+    font-size: 20px;
+}
+
+span {
+    font-size: 40px;
+}
+
+.review_container {
+    text-align: left;
+    justify-content: space-between;
+    display : flex;
+    flex-direction: row;
+}

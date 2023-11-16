@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {Home, Explore, Community, ContactUs, SubmitSpot, Profile, Login, Register} from './pages/';
+import {Home, Explore, Community, ContactUs, SubmitSpot, Profile, Login, Register } from './pages/';
 import {Navbar} from './components';
 import SearchBar from './components/SearchBar';
+import SpotPage from './pages/SpotPage';
 // ... import other pages as well
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/spot" element={<SpotPage />} />
         </Routes>
       </Router>
     </div>
