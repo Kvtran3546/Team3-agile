@@ -3,12 +3,23 @@ const router = express.Router();
 const data = require("../data");
 const listings = data.listings;
 
+function isAuthenticated(req, res, next) {
+  if (req.session && req.session.user) {
+      return next();
+  } else {
+      res.status(401).send('Not authorized');
+  }
+}
+
+router.get('/',isAuthenticated,(req, res) => {
+  res.send('Welcome to the Listings API');
+});
+
+
 router
   .route('/submitspot')
   .post(async (req, res) => {
-    //code here for POST
     try{
-      console.log("got in");
       let info = req.body;
       if (!info.title) throw "There needs to be a title";
       if (!info.address) throw "There needs to be an address";
@@ -33,8 +44,8 @@ router
   .get(async (req, res) => {
     //code here for POST
     try{
-        const all_listings = listings.getAll();
-      if (output == null){
+        const all_listings = await listings.getAll();
+      if (all_listings == null){
         res.status(500).json({error: "Internal Server Error"});
         return;
       }
