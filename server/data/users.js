@@ -136,6 +136,10 @@ const checkUser = async (email, username, password) => {
   return {authenticatedUser: true};
  };
 
+const getUserByID = async (id) => {
+  
+}
+
 module.exports = {
   createUser,
   checkUser,
