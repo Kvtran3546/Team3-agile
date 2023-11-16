@@ -1,7 +1,8 @@
 // import {listings} from '../config/mongoCollections.js';
 // import {ObjectId} from 'mongodb';
 //import * as helpers from '../../src/helpers.js';
-const listings = require("../config/mongoCollections.js");
+const mongoCollections = require("../config/mongoCollections");
+const listings = mongoCollections.listings;
 const ObjectId = require("mongodb");
 const helpers = require("../helpers.js");
 

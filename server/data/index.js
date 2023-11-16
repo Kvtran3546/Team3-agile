@@ -1,8 +1,8 @@
-const listingsDataFunctions = require("./listings.js");
+const listingsData = require("./listings.js");
 const userData = require("./users.js");
 
 module.exports = {
     users: userData,
-    listingsData: listingsDataFunctions
+    listings: listingsData
 }
 

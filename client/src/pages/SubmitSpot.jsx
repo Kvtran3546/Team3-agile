@@ -19,9 +19,12 @@ function SubmitSpot() {
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
     const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setInputs(values => ({...values, [name]: value}))
+        const { name, value, type, files } = event.target;
+        if (type === "file") {
+            setSelectedFile(files[0]);
+        } else {
+            setInputs(values => ({...values, [name]: value}));
+        }
     }
 
     const handleSubmit = async (event) => {

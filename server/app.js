@@ -14,7 +14,7 @@ app.use(cors({
 
 app.use(session({
     name: 'AuthCookie',
-    secret: 'some secret string',
+    secret: 'Town_Treasuress',
     resave: false,
     saveUninitialized: true
 }));
