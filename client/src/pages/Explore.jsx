@@ -4,6 +4,7 @@ import { listingData } from '../constants/index.js';
 import  '../css/Listings.css';
 import {ListingCard} from '../components/';
 import { mainimg } from '../assets';
+
 const Explore = () => {
   return (
     <div className='flex flex-col w-full bg-[#E2E2E2] pb-10 items-center'>

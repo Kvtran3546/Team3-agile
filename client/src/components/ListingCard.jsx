@@ -15,8 +15,8 @@ const Card = ({ image, title, address }) => {
             <img src={image} alt='model_img' style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         </div>
         <div className='flex flex-col justify-center items-center w-[50%] h-[100%]'>
-            <h2 className={`${styles.heading2} text-[14px] font-semibold text-[#02874D] uppercase border-b-2 w-full flex justify-center items-center h-[50%]`} >{title}</h2>
-            <p className={`${styles.paragraph} text-[14px] text-[#02874D] w-full h-[50%] flex justify-center items-center`}>{address}</p>
+          <a href='../spot' className={`${styles.heading2} text-[14px] font-semibold text-[#02874D] uppercase border-b-2 w-full flex justify-center items-center h-[50%]`} >{title}</a>
+          <p className={`${styles.paragraph} text-[14px] text-[#02874D] w-full h-[50%] flex justify-center items-center`}>{address}</p>
         </div>
     </div>
   );
