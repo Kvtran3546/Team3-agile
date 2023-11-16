@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
     const [username, setusername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     // Handle form submission
     const handleSubmit = async (event) => {
@@ -22,7 +23,10 @@ const Login = () => {
             console.log(response);
             navigate('/home');
         } catch (error) {
-            console.error('Error during login:', error.response ? error.response.data : error.message);
+            const errorMsg = error.response && error.response.data && error.response.data.error
+                             ? error.response.data.error
+                             : error.message;
+            setErrorMessage(errorMsg);
         }
     };
     
@@ -55,6 +59,7 @@ const Login = () => {
                 />
             </div>
             <button type="submit" className='w-[150px] h-fit py-2 bg-gray-400 rounded-md text-white hover:bg-gray-600 transition-all duration-300'>Sign in</button>
+            {errorMessage && <p className="text-red-500 text-center transition-all duration-200 mt-2">{errorMessage}</p>} {/* Display error message */}
             <p className='text-center text-[13px] my-10'>Forgot username or password?</p>
             <p className='text-center text-[11px]'>Control what you share with other adventurers application Authorized Developers in Settings</p>
         </form>
