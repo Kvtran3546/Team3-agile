@@ -3,20 +3,21 @@ const data = require('./data');
 const users = data.users;
 
 async function main() {
-    const db = await dbConnection();
+    const db = await dbConnection.dbConnection();
     await db.dropDatabase();
 
     try {
         // Create user accounts
-        await users.createUser('alice@example.com', 'Alice', 'alicepassword');
-        await users.createUser('bob@example.com', 'Bob', 'bobpassword');
+        await users.createUser('alice@gmail.com', 'Alice', 'Alicepassword!123');
+        await users.createUser('bob@gmail.com', 'Bob123', 'Bobpassword!123');
+        await users.createUser('tommy@gmail.com', 'Tommy202', 'Tompassword!123');
+        await users.createUser('Jadek123@gmail.com', 'JadekXoXo123', 'Jadepassword!123');
         // Add more users as needed
     } catch (e) {
         console.error('Error creating seed data:', e);
     }
-
     console.log('Finished seeding database with initial data');
-    await db.serverConfig.close();
+    return 0;
 }
 
 main().catch(console.error);
