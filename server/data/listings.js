@@ -3,11 +3,11 @@
 //import * as helpers from '../../src/helpers.js';
 const mongoCollections = require("../config/mongoCollections");
 const listings = mongoCollections.listings;
-const ObjectId = require("mongodb");
+const { ObjectId } = require('mongodb');
 const helpers = require("../helpers.js");
 
 const createPost = async (title, address, city, state, description, imageURL) => {
-	console.log("got in");
+	// console.log("got in");
 	title = helpers.isValidString(title, "Title");
 	address = helpers.isValidString(address, "Address");
 	city = helpers.isValidString(city, "City");
