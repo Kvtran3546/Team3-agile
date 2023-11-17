@@ -12,6 +12,16 @@ async function main() {
         await users.createUser('bob@gmail.com', 'Bob123', 'Bobpassword!123');
         await users.createUser('tommy@gmail.com', 'Tommy202', 'Tompassword!123');
         await users.createUser('Jadek123@gmail.com', 'JadekXoXo123', 'Jadepassword!123');
+        
+        await users.createUser('echo@gmail.com', 'Echo11', 'Echopassword!123');
+        await users.createUser('basil@gmail.com', 'Basilheart', 'Basilpassword!123');
+        await users.createUser('lucas@gmail.com', 'LucasA', 'Lucaspassword!123');
+        await users.createUser('raye@gmail.com', 'RayeGun', 'Rayepassword!123');
+
+        await users.createUser('nikos@gmail.com', 'Nikos', 'Nikospassword!123');
+        await users.createUser('shudong@gmail.com', 'Shudong', 'Shudongpassword!123');
+        await users.createUser('meunier@gmail.com', 'Meunier', 'Meunierpassword!123');
+        await users.createUser('sandeep@gmail.com', 'Sandeep', 'Sandeeppassword!123');
         // Add more users as needed
     } catch (e) {
         console.error('Error creating seed data:', e);
