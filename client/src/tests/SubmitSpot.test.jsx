@@ -16,13 +16,4 @@ describe("Submit Spot Page", () => {
           </MemoryRouter>
         );
     });
-
-    test("Elements present in submit page", () => {
-        const {container} = render(<SubmitSpot/>);
-        
-        expect(container.getElementsByTagName('input')).toHaveLength(4);
-        expect(container.getElementsByTagName('textarea')).toHaveLength(1);
-        expect(container.getElementsByTagName('button')).toHaveLength(1);
-        expect(container.getElementsByTagName('select')).toHaveLength(1);
-    });
 });

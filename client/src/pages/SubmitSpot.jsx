@@ -1,9 +1,7 @@
-import React from 'react'
-import { useState } from 'react';
 import '../css/SubmitSpot.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-
+import React, {useEffect, useState} from 'react'
 
 const abbreviations = [
     'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY',
@@ -12,9 +10,32 @@ const abbreviations = [
 ];
 
 function SubmitSpot() {
+    const [auth, setAuth] = useState(false);
+    const [message, setErrorMessage] = useState('');
+    const [name, setName] = useState('');
+    const navigate = useNavigate();
+    useEffect(() =>  {
+        console.log('Component mounted or updated');
+        const response = axios.get('http://localhost:3000/users/',{ withCredentials: true })
+        .then(res => {
+            if(res.data.Status === "Success") {
+            setAuth(true);
+            setName(res.data.name);
+            } else {
+            setAuth(false);
+            setErrorMessage(res.data.error);
+            navigate('/login');
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching data: ", error);
+            setErrorMessage("Error fetching data");
+            navigate('/login');
+        });
+        // Include navigate in the dependency array to ensure useEffect is aware of it
+        }, [navigate]);
     const [selectedFile, setSelectedFile] = useState();
     const [inputs, setInputs] = useState({});
-    const navigate = useNavigate();
     const handleChange = (event) => {
         const { name, value, type, files } = event.target;
         if (type === "file") {

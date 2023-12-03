@@ -2,7 +2,7 @@ import { Home } from "../pages";
 import { new_home, traditional, popular } from "../assets";
 export const navLinks = [
     {
-        id: "home",
+        id: "",
         title : "Home",
     },
     {
@@ -16,14 +16,6 @@ export const navLinks = [
     {
         id : "profile",
         title : 'Profile',
-    },
-    {
-        id : "login",
-        title : 'Login',
-    },
-    {
-        id : "register",
-        title : 'Register',
     },
 ]
 

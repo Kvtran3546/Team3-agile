@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar } from '../components';
+import { Header } from '../components';
 import { Form } from 'react-bootstrap';
 import '../css/SubmitSpot.css';
 import axios from 'axios';
@@ -14,7 +14,7 @@ const Register = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/register', {
+            const response = await axios.post('http://localhost:3000/users/register', {
                 email: email,
                 username: username,
                 password: password
@@ -26,8 +26,9 @@ const Register = () => {
     };
 
     return (
-        <div className='bg-[#F5F5F5] w-full h-fit py-10 flex justify-center items-center flex-col'>
-            <form onSubmit={handleSubmit} className="flex flex-col bg-white py-10 w-[440px] h-fit px-10 rounded-md">
+        <div className='bg-[#F5F5F5] w-full h-[100vh] flex items-center flex-col'>
+            <Header />
+            <form onSubmit={handleSubmit} className="flex flex-col bg-white py-10 w-[440px] h-fit px-10 rounded-md mt-10">
                 <p className='w-full mb-10'>By signing up, you agree to our Terms of Use and Privacy Policy</p>
                 <div className='flex flex-col w-[90%] mb-5'>
                     <label htmlFor="email" className='text-[15px] text-gray-500 font-normal leading-tight uppercase py-2'>Email Address</label>

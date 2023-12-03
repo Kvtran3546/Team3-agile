@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
-import {Navbar} from '../components'
+import {Header} from '../components'
 import {Form} from 'react-bootstrap';
 import '../css/SubmitSpot.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+axios.defaults.withCredentials = true;
 const Login = () => {
     const [username, setusername] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +22,7 @@ const Login = () => {
                 password: password
             });
             console.log(response);
-            navigate('/home');
+            navigate('/');
         } catch (error) {
             const errorMsg = error.response && error.response.data && error.response.data.error
                              ? error.response.data.error
@@ -31,8 +32,9 @@ const Login = () => {
     };
     
   return (
-    <div className='bg-[#F5F5F5] w-full h-fit py-10 flex justify-center items-center flex-col'>
-        <form onSubmit={handleSubmit} className="flex flex-col bg-white py-10 w-[440px] h-fit px-10 rounded-md">
+    <div className='bg-[#F5F5F5] w-full flex items-center flex-col h-[100vh]'>
+        <Header />
+        <form onSubmit={handleSubmit} className="flex flex-col bg-white py-10 w-[440px] h-fit px-10 rounded-md mt-10 ">
             <p className='w-full mb-10'>By signing in, you agree to Terms of Use and Privacy Policy</p>
             <div className='flex flex-col w-[90%] mb-5'>
                 <label htmlFor="username" className='text-[15px] text-gray-500 font-normal leading-tight uppercase py-2'>Username</label>
