@@ -17,7 +17,6 @@ import {
 } from "./pages/";
 import { Navbar } from "./components";
 import SpotPage from "./pages/SpotPage";
-
 const Layout = ({ children }) => {
   const location = useLocation();
   const hideNavbarOn = ["/login", "/register"]; // Paths where Navbar should not be shown
@@ -33,7 +32,7 @@ const Layout = ({ children }) => {
 function App() {
   return (
     <Router className="w-full">
-      <Routes>
+      <Routes className="">
         <Route
           path="/"
           element={

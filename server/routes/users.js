@@ -6,6 +6,7 @@ const data = require("../data");
 const users = data.users;
 
 const verifyUser = (req, res, next) => {
+  console.log("Req =", req.name)
   console.log("Cookies received:", req.cookies);
   const token = req.cookies.token;
   if (!token) {
@@ -17,7 +18,11 @@ const verifyUser = (req, res, next) => {
         res.status(400).json({ error: "Not correct token" });
         return;
       } else {
+        console.log(decoded)
         req.name = decoded.name;
+        req.userId = decoded.id;
+        req.email = decoded.email;
+        req.userDate = decoded.userDate;
         next();
       }
     });
@@ -25,8 +30,11 @@ const verifyUser = (req, res, next) => {
 };
 
 router.get("/", verifyUser, (req, res) => {
-  return res.json({ Status: "Success", name: req.name });
+  console.log("Req ===", req.name, "---", req.email, "---", req.userId, "---", req.userDate);
+  return res.json({ Status: "Success", name: req.name, email: req.email, userId: req.userId, userDate: req.userDate});
 });
+
+
 
 router.route("/register").post(async (req, res) => {
   try {
@@ -42,7 +50,7 @@ router.route("/register").post(async (req, res) => {
     }
 
     const name = output.username;
-    const token = jwt.sign({ name }, "Town_Treasures_Key", { expiresIn: "1d" });
+    const token = jwt.sign({ name, id: output._id, email: output.email, userDate: output.created_at }, "Town_Treasures_Key", { expiresIn: "1d" });
     res.cookie("token", token, {
       maxAge: 60 * 60 * 24 * 1000, // 1 day
       httpOnly: true,
@@ -68,8 +76,10 @@ router.route("/login").post(async (req, res) => {
     if (output == null) {
       res.status(500).json({ error: "Internal Server Error" });
     }
-    const name = output.username;
-    const token = jwt.sign({ name }, "Town_Treasures_Key", { expiresIn: "1d" });
+    const name = info.username;
+    console.log(name);
+    console.log(output);
+    const token = jwt.sign({ name, id: output._id, email: output.email, userDate: output.created_at }, "Town_Treasures_Key", { expiresIn: "1d" });
     console.log(token);
     res.cookie("token", token, {
       maxAge: 60 * 60 * 24 * 1000,
