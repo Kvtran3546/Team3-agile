@@ -3,34 +3,66 @@
 //import * as helpers from '../../src/helpers.js';
 const mongoCollections = require("../config/mongoCollections");
 const listings = mongoCollections.listings;
-const ObjectId = require("mongodb");
+const {ObjectId} = require("mongodb");
 const helpers = require("../helpers.js");
+const fs = require("fs").promises;
 
-const createPost = async (title, address, city, state, description, imageURL) => {
+async function isValidFilePath(path) {
+	try {
+	  await fs.access(path);
+	  return true; // The file exists
+	} catch {
+	  return false; // The file does not exist
+	}
+  }
+
+const createPost = async (title, address, city, state, description, imagePaths) => {
 	console.log("got in");
 	title = helpers.isValidString(title, "Title");
 	address = helpers.isValidString(address, "Address");
 	city = helpers.isValidString(city, "City");
 	state = helpers.isValidString(state, "State");
 	description = helpers.isValidString(description, "Description");
-	//check if imageURLs are right
-
-	let newListing= {
-		title: title,
-		address: address,
-		city: city,
-		state: state,
-		description: description,
-		imageURL: imageURL,
-    };
 	
+	// Check if imageURLs is an array and validate each URL
+	if (!Array.isArray(imagePaths)) {
+		throw new Error("imagePaths must be an array");
+	  }
+	
+	  // Validate each file path
+	  for (const path of imagePaths) {
+		const exists = await isValidFilePath(path);
+		if (!exists) {
+		  throw new Error(`File does not exist at path: ${path}`);
+		}
+	  }
+	let newListing = {
+	  title: title,
+	  address: address,
+	  city: city,
+	  state: state,
+	  description: description,
+	  imagePaths: imagePaths, // Store as an array
+	};
+	console.log(newListing);
 	const listingsCollection = await listings();
 	const insertInfo = await listingsCollection.insertOne(newListing);
-	if (!insertInfo.acknowledged || !insertInfo.insertedId) {throw new Error("Error: unable to add listing.")}
+	if (!insertInfo.acknowledged || !insertInfo.insertedId) {
+	  throw new Error("Error: unable to add listing.");
+	}
 	const newId = insertInfo.insertedId.toString();
 	const listing = await get(newId);
 	return listing;
-};
+  };
+  
+  function isValidURL(url) {
+	try {
+	  new URL(url);
+	  return true;
+	} catch (e) {
+	  return false;
+	}
+  }
 
 const getAll = async () => {
 	const listingsCollection = await listings();

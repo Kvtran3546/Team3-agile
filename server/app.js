@@ -62,8 +62,6 @@ const transporter = nodemailer.createTransport({
       pass: process.env.PASSWORD// It's safer to use environment variables or other secure methods
   }
 });
-console.log(process.env.EMAIL);
-console.log(process.env.PASSWORD);
 app.post('/send-email', (req, res) => {
   const { email, topic, message } = req.body;
 
