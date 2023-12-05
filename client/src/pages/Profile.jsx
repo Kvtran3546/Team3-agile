@@ -84,10 +84,10 @@ export default function Profile() {
             </div>
 
             <div className="contentDisplay">
-                <h1 className="contentHeader">Latest Activity</h1>
+                <h1 className="contentHeader">My Spots</h1>
                 <hr/>
                 <div className="contentDisplayContent">
-                    <text>You have no recent activities.</text>
+                    <text>You have no uploads.</text>
                 </div>
                 <SubmitButton />
             </div>
