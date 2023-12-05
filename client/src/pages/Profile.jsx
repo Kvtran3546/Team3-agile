@@ -10,13 +10,23 @@ export default function Profile() {
     const [auth, setAuth] = useState(false);
     const [message, setErrorMessage] = useState('');
     const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [userId, setUserId] = useState('');
+    const [joinedDate, setJoinedDate] = useState('');
+    function formatDate(isoDateString) {
+        const date = new Date(isoDateString);
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    }
     useEffect(() =>  {
-        console.log('Component mounted or updated');
-        const response = axios.get('http://localhost:3000/users/',{ withCredentials: true })
+        axios.get('http://localhost:3000/users/',{ withCredentials: true })
         .then(res => {
             if(res.data.Status === "Success") {
             setAuth(true);
             setName(res.data.name);
+            setEmail(res.data.email);
+            setUserId(res.data.userId);
+            setJoinedDate(formatDate(res.data.userDate));
+            console.log(res.data.name);
             } else {
             setAuth(false);
             setErrorMessage(res.data.error);
@@ -43,8 +53,8 @@ export default function Profile() {
         <div className="profileContainer pb-10">
             <div className="profileInfoContainer">
                 <img className="profileImage" src={"https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png"}/>
-                <h1>username</h1>
-                <text style={{fontSize : 10}}>Joined 10/28/2023</text>
+                <h1>{name || 'username'}</h1>
+                <text style={{fontSize : 10}}>{"Joined Date : " + joinedDate || 'Joined Date'}</text>
                 <button className="editProfileButton">Edit Profile</button>
             </div>
             <div className="linkList">

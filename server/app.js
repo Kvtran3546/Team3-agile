@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const configRoutes = require("./routes");
 const jwtSecret = "Town_Treasures_Key";
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
@@ -51,6 +53,36 @@ app.use(async (req, res, next) => {
     );
   }
   next();
+});
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail', // Use your email service;
+  auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD// It's safer to use environment variables or other secure methods
+  }
+});
+console.log(process.env.EMAIL);
+console.log(process.env.PASSWORD);
+app.post('/send-email', (req, res) => {
+  const { email, topic, message } = req.body;
+
+  const mailOptions = {
+      from: email,
+      to: 'Town_Treasures@gmail.com',
+      subject: `Contact Form Submission - ${topic}`,
+      text: message
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          console.log(error);
+          res.status(500).send('Error sending email');
+      } else {
+          console.log('Email sent: ' + info.response);
+          res.status(200).send('Email successfully sent');
+      }
+  });
 });
 
 configRoutes(app);

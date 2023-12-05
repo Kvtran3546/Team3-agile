@@ -48,7 +48,8 @@ const createUser = async (
   let newUser = {
     email : email,
     username: username,
-    password: hashedPassword
+    password: hashedPassword,
+    created_at: new Date()
   };
   const insertInfo = await userCollection.insertOne(newUser);
   if (!insertInfo.acknowledged || !insertInfo.insertedId){
@@ -133,7 +134,7 @@ const checkUser = async (email, username, password) => {
   if (user===null) throw "Either the username or password is invalid";
   let comparison = await bcrypt.compare(password, user.password);
   if (comparison==false) throw "Either the username or password is invalid";
-  return {authenticatedUser: true};
+  return user;
  };
 
 const getUserByID = async (id) => {

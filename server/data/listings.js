@@ -23,7 +23,7 @@ const createPost = async (title, address, city, state, description, imageURL) =>
 		description: description,
 		imageURL: imageURL,
     };
-
+	
 	const listingsCollection = await listings();
 	const insertInfo = await listingsCollection.insertOne(newListing);
 	if (!insertInfo.acknowledged || !insertInfo.insertedId) {throw new Error("Error: unable to add listing.")}
