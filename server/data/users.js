@@ -138,10 +138,50 @@ const checkUser = async (email, username, password) => {
  };
 
 const getUserByID = async (id) => {
-  
+  if (!id) throw "ID parameter is required";
+
+  // Converting the id from string to ObjectId if necessary
+  let objectId;
+  try {
+    objectId = new require('mongodb').ObjectId(id);
+  } catch (error) {
+    throw "Invalid ID format";
+  }
+
+  const userCollection = await users();
+  const user = await userCollection.findOne({ _id: objectId });
+  if (!user) throw "No user found with the given ID";
+
+  return user;
+}
+const editUser = async (id, newName) => {
+  if (!id) throw "ID parameter is required";
+  if (!newName) throw "New name parameter is required";
+  if (typeof newName !== "string") throw "New name must be a string";
+
+  // Converting the id from string to ObjectId if necessary
+  let objectId;
+  try {
+    objectId = new require('mongodb').ObjectId(id);
+  } catch (error) {
+    throw "Invalid ID format";
+  }
+
+  const userCollection = await users();
+  const updateResult = await userCollection.updateOne(
+    { _id: objectId },
+    { $set: { name: newName } }
+  );
+
+  if (updateResult.matchedCount === 0) throw "No user found with the given ID";
+  if (updateResult.modifiedCount === 0) throw "User data not updated";
+
+  return { userUpdated: true };
 }
 
 module.exports = {
+  editUser,
+  getUserByID,
   createUser,
   checkUser,
   checkLogin,

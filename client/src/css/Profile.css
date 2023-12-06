@@ -84,3 +84,17 @@ hr {
     align-items : center;
     
 }
+.post {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.post h3 {
+    margin: 0;
+    color: #333;
+}
+.post p {
+    margin: 5px 0;
+    color: #666;
+}

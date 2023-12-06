@@ -1,6 +1,6 @@
 import  '../css/Profile.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { SubmitButton } from "../components";
+import { SubmitButton, ListingCard } from "../components";
 import axios from "axios";
 import React, {useEffect, useState} from 'react'
 
@@ -13,6 +13,8 @@ export default function Profile() {
     const [email, setEmail] = useState('');
     const [userId, setUserId] = useState('');
     const [joinedDate, setJoinedDate] = useState('');
+    const [userPosts, setUserPosts] = useState([]);
+    const BACKEND_URL = 'http://localhost:3000/';
     function formatDate(isoDateString) {
         const date = new Date(isoDateString);
         return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -26,7 +28,6 @@ export default function Profile() {
             setEmail(res.data.email);
             setUserId(res.data.userId);
             setJoinedDate(formatDate(res.data.userDate));
-            console.log(res.data.name);
             } else {
             setAuth(false);
             setErrorMessage(res.data.error);
@@ -37,6 +38,14 @@ export default function Profile() {
             console.error("Error fetching data: ", error);
             setErrorMessage("Error fetching data");
             navigate('/login');
+        });
+        axios.get('http://localhost:3000/listings/userposts', { withCredentials: true })
+        .then(res => {
+            setUserPosts(res.data); // Update state with fetched posts
+        })
+        .catch(error => {
+            console.error("Error fetching user posts: ", error);
+            setErrorMessage("Error fetching user posts");
         });
         // Include navigate in the dependency array to ensure useEffect is aware of it
     }, [navigate]);
@@ -83,15 +92,25 @@ export default function Profile() {
                 </div>
             </div>
 
-            <div className="contentDisplay">
-                <h1 className="contentHeader">Latest Activity</h1>
+            <div className="contentDisplay flex flex-col h-fit">
+                <h1 className="contentHeader">My Spots</h1>
                 <hr/>
-                <div className="contentDisplayContent">
-                    <text>You have no recent activities.</text>
+                <div className="contentDisplayContent h-fit flex flex-col justify-center items-center w-full py-5">
+                    {userPosts.length > 0 ? (
+                        userPosts.map(post => (
+                            <ListingCard
+                                key={post._id} 
+                                image={`${BACKEND_URL}${post.imagePaths[0].replace(/\\/g, '/')}`} // Assuming the first image in the array
+                                title={post.title} 
+                                address={post.address} 
+                            />
+                        ))
+                    ) : (
+                        <text>You have no uploads.</text>
+                    )}
                 </div>
                 <SubmitButton />
             </div>
-
         </div>
     </div>);
 }
