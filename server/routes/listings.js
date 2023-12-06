@@ -73,7 +73,7 @@ router
 
 router
   .route('/submitreview')
-  .post(verifyUser, async (req, res) => {
+  .post(/*verifyUser,*/ async (req, res) => {
     try {
       console.log('Adding review');
       let info = req.body;
