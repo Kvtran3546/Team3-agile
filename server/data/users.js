@@ -39,7 +39,7 @@ const createUser = async (
   console.log("Validate parameters successfully");
   try{
   const userCollection = await users();
-  const user = await userCollection.findOne({username: username});
+  let user = await userCollection.findOne({username: username});
   if (user!=null) throw "Username already exists!";
   const user_email = await userCollection.findOne({email: email});
   if (user_email!=null) throw "Account with this email already exists!";
@@ -55,8 +55,11 @@ const createUser = async (
   if (!insertInfo.acknowledged || !insertInfo.insertedId){
     throw "Could not add user";
   }
-
-  return {userInserted: true};
+  user = await userCollection.findOne({username: username});//which username is which?
+  if (user===null) throw "Either the username or password is invalid";
+  let comparison = await bcrypt.compare(password, user.password);
+  if (comparison==false) throw "Either the username or password is invalid";
+  return user;
 }
 catch(e){
   console.log(e);
