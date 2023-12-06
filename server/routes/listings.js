@@ -81,8 +81,10 @@ router
         const userPosts = await listings.getPostsByUserId(userId);
         console.log(userPosts);
         res.status(200).json(userPosts);
+        return;
     } catch (e) {
         res.status(400).json({ error: e.message });
+        return;
     }
 });
 
