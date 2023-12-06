@@ -19,7 +19,7 @@ const Register = () => {
                 username: username,
                 password: password
             });
-            navigate('/home');
+            navigate('/');
         } catch (error) {
             console.error('Error during registration:', error.response ? error.response.data : error.message);
         }
