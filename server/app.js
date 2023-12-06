@@ -55,6 +55,9 @@ app.use(async (req, res, next) => {
   next();
 });
 
+app.use('/uploads', express.static('./uploads'));
+
+
 const transporter = nodemailer.createTransport({
   service: 'gmail', // Use your email service;
   auth: {

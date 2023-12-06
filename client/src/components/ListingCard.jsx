@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../styles';
-const Card = ({ image, title, address }) => {
+const ListingCard = ({ image, title, address }) => {
   return (
     <div className='lg:w-[45%] md:w-[45%] w-[80%] flex flex-row md:mx-1 rounded-lg bg-white my-10 h-[250px]'>
         <div
@@ -22,4 +22,4 @@ const Card = ({ image, title, address }) => {
   );
 }
 
-export default Card;
+export default ListingCard;

@@ -16,14 +16,14 @@ async function isValidFilePath(path) {
 	}
   }
 
-const createPost = async (title, address, city, state, description, imagePaths) => {
+const createPost = async (title, address, city, state, description, imagePaths, userID) => {
 	console.log("got in");
 	title = helpers.isValidString(title, "Title");
 	address = helpers.isValidString(address, "Address");
 	city = helpers.isValidString(city, "City");
 	state = helpers.isValidString(state, "State");
 	description = helpers.isValidString(description, "Description");
-	
+	if(!ObjectId.isValid(userID)) throw "Invalid user ID";
 	// Check if imageURLs is an array and validate each URL
 	if (!Array.isArray(imagePaths)) {
 		throw new Error("imagePaths must be an array");
@@ -36,13 +36,15 @@ const createPost = async (title, address, city, state, description, imagePaths) 
 		  throw new Error(`File does not exist at path: ${path}`);
 		}
 	  }
+	
 	let newListing = {
 	  title: title,
 	  address: address,
 	  city: city,
 	  state: state,
 	  description: description,
-	  imagePaths: imagePaths, // Store as an array
+	  imagePaths: imagePaths,
+	  userID: userID // Store as an array
 	};
 	console.log(newListing);
 	const listingsCollection = await listings();
@@ -51,7 +53,7 @@ const createPost = async (title, address, city, state, description, imagePaths) 
 	  throw new Error("Error: unable to add listing.");
 	}
 	const newId = insertInfo.insertedId.toString();
-	const listing = await get(newId);
+	const listing = await getPostById(newId);
 	return listing;
   };
   
@@ -75,7 +77,7 @@ const getAll = async () => {
 	return listingList;
 };
 
-const get = async (id) => {
+const getPostById = async (id) => {
 	id = helpers.isValidString(id);
 	if (!ObjectId.isValid(id)) {throw new Error("Error: invalid object ID.")}
     const listingsCollection = await listings();
@@ -85,7 +87,7 @@ const get = async (id) => {
     return listing;
 };
 
-const remove = async (id) => {
+const removePostById = async (id) => {
 	id = helpers.isValidString(id);
 	if (!ObjectId.isValid(id)) {throw new Error("Error: invalid object ID.")}
 	const listingsCollection = await listings();
@@ -94,11 +96,11 @@ const remove = async (id) => {
 	return `${deletionInfo.value.name} has been successfully deleted!`;
 };
 
-const update = async (id, updatedInfo) => {
+const updatePostById = async (id, updatedInfo) => {
 	id = helpers.isValidString(id);
 	if (!ObjectId.isValid(id)) {throw new Error("Error: invalid object ID.")}
 	const updatedListingInfo = {};
-	const oldListingInfo = await get(id)
+	const oldListingInfo = await getPostById(id)
 	let changes = 0;
 	if (updatedInfo.title) {
 		updatedListingInfo.title = helpers.isValidString(updatedInfo.title, "Title");
@@ -150,10 +152,28 @@ const update = async (id, updatedInfo) => {
 		return updatedListing.value;
 };
 
+const getPostsByUserId = async (userId) => {
+    if (!ObjectId.isValid(userId)) {
+        throw new Error("Error: invalid user ID.");
+    }
+    const listingsCollection = await listings();
+    const query = { userID: userId }; // Use userID as a string
+    const userPosts = await listingsCollection.find(query).toArray();
+	console.log(userPosts);
+    if (!userPosts || userPosts.length === 0) {
+        throw new Error("Error: No posts found for this user.");
+    }
+    return userPosts.map(post => {
+        post._id = post._id.toString(); // Convert ObjectId to string
+        return post;
+    });
+};
+
 module.exports = {
+	getPostsByUserId,
 	createPost,
 	getAll,
-	get,
-	remove,
-	update
+	getPostById	,
+	removePostById,
+	updatePostById
 }

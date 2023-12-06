@@ -60,6 +60,8 @@ function SubmitSpot() {
   const [auth, setAuth] = useState(false);
   const [message, setErrorMessage] = useState("");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState('');
   const navigate = useNavigate();
   useEffect(() => {
     const response = axios
@@ -68,6 +70,8 @@ function SubmitSpot() {
         if (res.data.Status === "Success") {
           setAuth(true);
           setName(res.data.name);
+          setEmail(res.data.email);
+          setUserId(res.data.userId);
         } else {
           setAuth(false);
           setErrorMessage(res.data.error);
