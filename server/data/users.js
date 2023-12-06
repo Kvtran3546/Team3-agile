@@ -8,10 +8,10 @@ const createUser = async (
   email, username, password
 ) => {
   console.log("Creating user", email, username, password);
-  if (!email) throw "There needst to be an email address";
+  if (!email) throw "There needs to be an email address";
   if (!username) throw "There needs to be a username";
   if (!password) throw "There needs to be a password";
-  if (typeof(username)!=="string") throw "Username needs to of type string";
+  if (typeof(username)!=="string") throw "Username needs to be of type string";
   console.log("checking email");
   if(helpers.validateEmail(email) == null) throw "Invalid email address";
   console.log("email is valid")
@@ -67,7 +67,7 @@ const checkUser = async (email, username, password) => {
   if (!email) throw "There needs to be an email address"
   if (!username) throw "There needs to be a username";
   if (!password) throw "There needs to be a password";
-  if (typeof(username)!=="string") throw "Username needs to of type string";
+  if (typeof(username)!=="string") throw "Username needs to be of type string";
   username = username.trim();
   if (username.length<4) throw "Username needs to have at least 4 characters";
   if(validateEmail(email)) throw "Invalid email address";
@@ -106,7 +106,7 @@ const checkUser = async (email, username, password) => {
  const checkLogin = async (username, password) => {
   if (!username) throw "There needs to be a username";
   if (!password) throw "There needs to be a password";
-  if (typeof(username)!=="string") throw "Username needs to of type string";
+  if (typeof(username)!=="string") throw "Username needs to be of type string";
   username = username.trim();
   if (username.length<4) throw "Username needs to have at least 4 characters";
   for (let i=0;i<username.length;i++){
