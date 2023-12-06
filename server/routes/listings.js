@@ -38,7 +38,7 @@ const verifyUser = (req, res, next) => {
 router
   .route('/submitspot')
   .post(verifyUser, upload.array('images', 5), async (req, res) => {
-    try{
+    try {
       console.log('Uploading');
       let info = req.body;
       const userID = req.userId;
@@ -60,42 +60,67 @@ router
         userID
       );
       console.log(output);
-      if (output == null){
-        res.status(500).json({error: "Internal Server Error"});
+      if (output == null) {
+        res.status(500).json({ error: "Internal Server Error" });
         return;
       }
       res.json(output);
     } catch (e) {
       console.error('Error in post submission:', e);
-      res.status(400).json({error: e});
+      res.status(400).json({ error: e });
     }
   })
 
-  router.get("/userposts", verifyUser, async (req, res) => {
+router
+  .route('/submitreview')
+  .post(verifyUser, async (req, res) => {
     try {
-        const userId = req.userId; // Get the user ID from the verified token
-        console.log(userId);
-        if (!userId) {
-            throw new Error("User ID is not available");
-        }
-        const userPosts = await listings.getPostsByUserId(userId);
-        console.log(userPosts);
-        res.status(200).json(userPosts);
+      console.log('Adding review');
+      let info = req.body;
+      if (!info.userId) throw "There needs to be a title";
+      if (!info.postId) throw "There needs to be an address";
+      if (!info.review) throw "There needs to be a city";
+      const userId = info.userId;
+      const postId = info.postId;
+      const review = info.review;
+      let output = await listings.addReview(postId, userId, review);
+      console.log(output);
+      if (output == null) {
+        res.status(500).json({ error: "Internal Server Error" });
+        return;
+      }
+      res.json(output);
     } catch (e) {
-        res.status(400).json({ error: e.message });
+      console.error('Error in post submission:', e);
+      res.status(400).json({ error: e });
     }
+  })
+
+router.get("/userposts", verifyUser, async (req, res) => {
+  try {
+    const userId = req.userId; // Get the user ID from the verified token
+    console.log(userId);
+    if (!userId) {
+      throw new Error("User ID is not available");
+    }
+    const userPosts = await listings.getPostsByUserId(userId);
+    console.log(userPosts);
+    res.status(200).json(userPosts);
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 });
 
 
-router 
+router
   .route("/spot")
   .get(async (req, res) => {
     try {
       const post = await listings.getPostById(req.params.id);
       res.status(200).json(post);
       return;
-    }catch(e){
-      res.status(400).json({error:e})
+    } catch (e) {
+      res.status(400).json({ error: e })
       return;
     }
   });
@@ -105,17 +130,17 @@ router
   .route("/listings")
   .get(async (req, res) => {
     //code here for POST
-    try{
-        const all_listings = await listings.getAll();
-      if (all_listings == null){
-        res.status(500).json({error: "Internal Server Error"});
+    try {
+      const all_listings = await listings.getAll();
+      if (all_listings == null) {
+        res.status(500).json({ error: "Internal Server Error" });
         return;
       }
       res.json(all_listings);
     } catch (e) {
-      res.status(400).json({error: e});
+      res.status(400).json({ error: e });
     }
   })
- 
+
 
 module.exports = router;
