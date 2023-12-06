@@ -44,7 +44,8 @@ const createPost = async (title, address, city, state, description, imagePaths, 
 	  state: state,
 	  description: description,
 	  imagePaths: imagePaths,
-	  userID: userID // Store as an array
+	  userID: userID, // Store as an array,
+	  reviews: []
 	};
 	console.log(newListing);
 	const listingsCollection = await listings();
@@ -169,11 +170,32 @@ const getPostsByUserId = async (userId) => {
     });
 };
 
+const addReview = async (id, userId, review) => {
+    if (!ObjectId.isValid(id) || !ObjectId.isValid(userId)) {
+        throw new Error("Error: invalid user ID.");
+    }
+    const listingsCollection = await listings();
+	const updatedListing = await listingsCollection.findOneAndUpdate(
+		{_id: new ObjectId(id)},
+		{$push: {
+			reviews: {
+				userId: new ObjectId(userId),
+				review: review
+			}
+		}},
+		{returnDocument: 'after'})
+		if (!updatedListing) {
+			throw new Error("Error: unable to find or update the listing.");
+		}
+		return updatedListing;
+};
+
 module.exports = {
 	getPostsByUserId,
 	createPost,
 	getAll,
 	getPostById	,
 	removePostById,
-	updatePostById
+	updatePostById,
+	addReview
 }
