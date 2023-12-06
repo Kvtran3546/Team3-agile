@@ -102,7 +102,10 @@ export default function Profile() {
                                 key={post._id} 
                                 image={`${BACKEND_URL}${post.imagePaths[0].replace(/\\/g, '/')}`} // Assuming the first image in the array
                                 title={post.title} 
-                                address={post.address} 
+                                address={post.address}
+                                city = {post.city}
+                                state = {post.state}
+                                description={post.description}
                             />
                         ))
                     ) : (
