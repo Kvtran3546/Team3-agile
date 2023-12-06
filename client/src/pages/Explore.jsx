@@ -6,11 +6,14 @@ import {ListingCard} from '../components/';
 import { mainimg } from '../assets';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { useReducer } from 'react';
+
 const Explore = () => {
   const [auth, setAuth] = useState(false);
   const [message, setErrorMessage] = useState('');
   const [name, setName] = useState('');
   const navigate = useNavigate();
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
   useEffect(() =>  {
     console.log('Component mounted or updated');
     const response = axios.get('http://localhost:3000/users/',{ withCredentials: true })
@@ -35,7 +38,7 @@ const Explore = () => {
     <div className='flex flex-col w-full bg-[#E2E2E2] pb-10 items-center'>
         <div className='relative flex flex-col justify-center items-center w-full py-10'>
           <h1 className='z-10 lg:text-[70px] md:text-[50px] sm:text-[40px] text-white'>Explore</h1>
-          <SearchBar/>
+          <SearchBar data={listingData} dataToStrings={(data)=>[data.title]} update={forceUpdate}/>
           <img src={mainimg} alt="natureimg" className="absolute w-full h-full overflow-hidden object-cover z-0 opacity-[90%] grayscale-[10%]"/>
         </div>
         <div className="flex flex-wrap h-full w-[90%] justify-between items-center">

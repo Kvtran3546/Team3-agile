@@ -54,6 +54,7 @@ function SearchBar(props) {
         console.log(props.data);
         // erase search bar
         setSearchTerm('');
+        props.update();
     }
 
     // return search bar, input + button
