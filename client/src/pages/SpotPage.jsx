@@ -2,7 +2,7 @@ import { listingData } from '../constants/index.js';
 import '../css/SpotPage.css';
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 function starString(num, maxNum=5) {
     var filled = new Array(num + 1).join("★");
@@ -10,7 +10,7 @@ function starString(num, maxNum=5) {
     return filled.concat(unfilled);
 }
 
-function SpotPage(props) {
+function SpotPage() {
     const [auth, setAuth] = useState(false);
     const [message, setErrorMessage] = useState('');
     const [name, setName] = useState('');
@@ -35,8 +35,7 @@ function SpotPage(props) {
         });
         // Include navigate in the dependency array to ensure useEffect is aware of it
         }, [navigate]);
-    const data = listingData[1];
-    console.log(props);
+    const data = useLocation().state;
     return (
         <div className='flex flex-col w-full bg-[#E2E2E2] items-center'>
         <div className='container'>
