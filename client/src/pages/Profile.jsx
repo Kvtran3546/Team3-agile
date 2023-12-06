@@ -64,7 +64,7 @@ export default function Profile() {
                 <img className="profileImage" src={"https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png"}/>
                 <h1>{name || 'username'}</h1>
                 <text style={{fontSize : 10}}>{"Joined Date : " + joinedDate || 'Joined Date'}</text>
-                <button className="editProfileButton">Edit Profile</button>
+                <Link to={"/editprofile"} className="editProfileButton">Edit Profile</Link>
             </div>
             <div className="linkList">
                 <h1 className="header">History</h1>
