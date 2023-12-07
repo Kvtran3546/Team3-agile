@@ -1,0 +1,23 @@
+.submitContainer {
+    background-color: rgb(46, 150, 86);
+    margin : 50px;
+    padding: 75px;
+    border-radius : 20px;
+    
+}
+
+.fieldInput {
+    width: 100%;
+    padding : 10px;
+    margin : 15px 0px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.submitButton {
+    background-color: white;
+    padding: 10px 30px;
+    border-radius: 10px;
+    margin: 10px;
+    color: white;
+}
