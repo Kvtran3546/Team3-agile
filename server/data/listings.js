@@ -31,7 +31,6 @@ const createPost = async (title, address, city, state, description, imagePaths, 
 	  // Validate each file path
 	  for (const path of imagePaths) {
 		const exists = await isValidFilePath(path);
-		console.log(path)
 		if (!exists) {
 		  throw new Error(`File does not exist at path: ${path}`);
 		}
@@ -159,7 +158,6 @@ const getPostsByUserId = async (userId) => {
     const listingsCollection = await listings();
     const query = { userID: userId }; // Use userID as a string
     const userPosts = await listingsCollection.find(query).toArray();
-	console.log(userPosts);
     if (!userPosts || userPosts.length === 0) {
         throw new Error("Error: No posts found for this user.");
     }

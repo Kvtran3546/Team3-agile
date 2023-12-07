@@ -51,26 +51,41 @@ const Explore = () => {
   if (errorMessage) return <div>Error: {errorMessage}</div>; // Error message
 
   return (
-    <div className='flex flex-col w-full bg-[#E2E2E2] pb-10 items-center'>
-        <div className='relative flex flex-col justify-center items-center w-full py-10'>
-          <h1 className='z-10 lg:text-[70px] md:text-[50px] sm:text-[40px] text-white'>Explore</h1>
-          <SearchBar data={listings} dataToStrings={(data) => [data.title]} />
-          <img src={mainimg} alt="natureimg" className="absolute w-full h-full overflow-hidden object-cover z-0 opacity-[90%] grayscale-[10%]"/>
+    <div className='explore-container'> {/* Use the new class here */}
+        <div>
+          {/* Header and Search Bar */}
+          <div className='relative flex flex-col justify-center items-center w-full py-10'>
+            <h1 className='z-10 lg:text-[70px] md:text-[50px] sm:text-[40px] text-white'>Explore</h1>
+            <SearchBar data={listings} dataToStrings={(data) => [data.title]} />
+            <img src={mainimg} alt="natureimg" className="absolute w-full h-full overflow-hidden object-cover z-0 opacity-[90%] grayscale-[10%]"/>
+          </div>
+
+          {/* Listings */}
+          <div className="flex flex-wrap w-[90%] justify-between items-center mx-auto">
+              {listings.length > 0 ? (
+                listings.map((post, index) => (
+                  <ListingCard
+                    key={post._id}
+                    image={`${BACKEND_URL}${post.imagePaths[0].replace(/\\/g, '/')}`} // Assuming the first image in the array
+                    title={post.title} 
+                    address={post.address}
+                    city = {post.city}
+                    state = {post.state}
+                    description={post.description}
+                  />
+                ))
+              ) : (
+                <div className="w-full h-full flex justify-center items-center">
+                    <h2 className="text-lg font-semibold mt-10">No spots have been submitted yet!</h2>
+                </div>
+              )}
+          </div>
         </div>
-        <div className="flex flex-wrap h-full w-[90%] justify-between items-center">
-            {listings.map((post, index) => (
-                <ListingCard
-                key={post._id} 
-                image={`${BACKEND_URL}${post.imagePaths[0].replace(/\\/g, '/')}`} // Assuming the first image in the array
-                title={post.title} 
-                address={post.address}
-                city = {post.city}
-                state = {post.state}
-                description={post.description}
-            />
-            ))}
+
+        {/* Submit Button */}
+        <div className='submit-button-fixed mb-10'> {/* Fixed position */}
+          <SubmitButton />
         </div>
-        <SubmitButton/>
     </div>
   );
 }

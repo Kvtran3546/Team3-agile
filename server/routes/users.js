@@ -132,13 +132,11 @@ router.post("/logout", async (req, res) => {
   }
 });
 
-router.patch("/profile/edit", async (req, res) => {
+router.patch("/profile/edit", verifyUser, async (req, res) => {
   try {
     let info = req.body;
     if (!info.newName) throw "There needs to be a new name";
-
-    const user = await users.editUser(info._id, info.newName);
-
+    const user = await users.editUser(req.userId, info.newName);
     res.status(200).json({ message: "Edit Successfully" });
   } catch (e) {
     res.status(400).json({ error: e });

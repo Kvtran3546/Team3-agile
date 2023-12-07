@@ -1,35 +1,47 @@
-import "../css/EditProfile.css";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function EditProfile() {
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [auth, setAuth] = useState(false);
+    const [email, setEmail] = useState(''); // If you want to allow changing the email
     const navigate = useNavigate();
-    useEffect(() =>  {
-        axios.get('http://localhost:3000/users/',{ withCredentials: true })
-        .then(res => {
-            if(res.data.Status === "Success") {
-            setAuth(true);
-            setUsername(res.data.name);
-            setPassword(res.data.password);
-            } else {
-            setAuth(false);
-            navigate('/login');
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching data: ", error);
-            setErrorMessage("Error fetching data");
-            navigate('/login');
-        });
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/users/', { withCredentials: true })
+            .then(res => {
+                if (res.data.Status === "Success") {
+                    setUsername(res.data.name);
+                    setEmail(res.data.email); // Assuming the email is part of the response
+                } else {
+                    navigate('/login');
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data: ", error);
+                navigate('/login');
+            });
     }, [navigate]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            // Send a patch request to update user information
+            await axios.patch('http://localhost:3000/users/profile/edit', { newName: username}, { withCredentials: true });
+            navigate('/profile');
+            // Handle response or navigate to another page
+        } catch (error) {
+            console.error("Error updating profile: ", error);
+            // Handle error
+        }
+    }
 
     return (
         <div>
-            <input type="text" value="" />
+            <form onSubmit={handleSubmit}>
+                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <button type="submit">Save Changes</button>
+            </form>
         </div>
     );
 }

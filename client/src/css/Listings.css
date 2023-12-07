@@ -2,3 +2,30 @@
     font-size: 40px;
     font-weight: bold;
 }
+
+.explore-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* This will push the SubmitButton to the bottom */
+    min-height: 100vh; /* Minimum height of the entire viewport */
+    background-color: #E2E2E2;
+  }
+
+/* Add this to your Listings.css */
+.submit-button-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Adjust these styles according to your button's design */
+    padding: 10px 0; /* Adjust padding as needed */
+    text-align: center; /* Center the button text */
+    z-index: 100; /* Ensure it's above other elements */
+  }
+  
+  .content-with-padding {
+    padding-bottom: 60px; /* Adjust this value based on your button's height */
+  }
+  
+  /* Rest of your CSS */
+  

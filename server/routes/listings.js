@@ -73,7 +73,6 @@ router
   .route('/submitreview')
   .post(/*verifyUser,*/ async (req, res) => {
     try {
-      console.log('Adding review');
       let info = req.body;
       if (!info.userId) throw "There needs to be a title";
       if (!info.postId) throw "There needs to be an address";
@@ -82,7 +81,6 @@ router
       const postId = info.postId;
       const review = info.review;
       let output = await listings.addReview(postId, userId, review);
-      console.log(output);
       if (output == null) {
         res.status(500).json({ error: "Internal Server Error" });
         return;

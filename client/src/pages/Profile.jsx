@@ -92,7 +92,7 @@ export default function Profile() {
                 </div>
             </div>
 
-            <div className="contentDisplay flex flex-col h-fit">
+            <div className="contentDisplay flex flex-col h-fit pb-5">
                 <h1 className="contentHeader">My Spots</h1>
                 <hr/>
                 <div className="contentDisplayContent h-fit flex flex-wrap justify-center items-center w-full py-5">
