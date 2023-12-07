@@ -10,7 +10,9 @@ const Home = () => {
   const [auth, setAuth] = useState(false);
   const [name, setName] = useState("");
   const navigate = useNavigate();
-
+  const handleSearch = (searchTerm) => {
+    navigate(`/explore?search=${encodeURIComponent(searchTerm)}`);
+  };
   useEffect(() => {
     axios
       .get("http://localhost:3000/users/", { withCredentials: true })
@@ -41,7 +43,7 @@ const Home = () => {
         <h1 className="z-10 lg:text-[60px] md:text-[40px] sm:text-[30px] text-white w-full text-center">
           Search for your new adventure here!
         </h1>
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <img
           src={mainimg}
           alt="natureimg"

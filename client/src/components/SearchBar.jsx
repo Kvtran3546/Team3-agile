@@ -32,44 +32,26 @@ function levenshteinDistance(a, b) {
     return distances[a.length][b.length];
 }
 
-function SearchBar(props) {
-    // what is in the search bar
+function SearchBar({ onSearch }) {
     const [searchTerm, setSearchTerm] = useState("");
-
-    // convert items in props.data to string by props.dataToStrings method
-    // Then sort by string closeness to current search term
-    function sortSearch() {
-        // out of all search terms from data items, get most similarity
-        function minimumDistance(string_list, istring) {
-            // convert string list to list of distances from input string
-            const mod_array = string_list.map((item) => levenshteinDistance(istring, item));
-            // minimum distance
-            return Math.min.apply(Math, mod_array);
-        }
-        // sort data based on smallest minimum leve distance
-        props.data.sort(function(a, b) {
-            return minimumDistance(props.dataToStrings(a), searchTerm) - minimumDistance(props.dataToStrings(b), searchTerm);
-        });
-        // print for debugging
-        console.log(props.data);
-        // erase search bar
-        setSearchTerm('');
-        props.update();
-    }
-
-    // return search bar, input + button
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      onSearch(searchTerm);
+    };
+  
     return (
-        <div className='search_container z-50'>
-            <input
-                className='search'
-                placeholder='Search for Cities, States, and more'
-                onChange={e => setSearchTerm(e.target.value)}
-                id='search'
-                value={searchTerm}
-            />
-            <button className='button' onClick={sortSearch}/>
-        </div>
+      <div className='search_container z-50'>
+        <input
+          className='search'
+          placeholder='Search for Cities, States, and more'
+          onChange={e => setSearchTerm(e.target.value)}
+          id='search'
+          value={searchTerm}
+        />
+        <button className='button' onClick={handleSubmit} />
+      </div>
     );
-}
+  }
 
 export default SearchBar;

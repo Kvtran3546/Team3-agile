@@ -49,6 +49,7 @@ export default function Profile() {
         });
         // Include navigate in the dependency array to ensure useEffect is aware of it
     }, [navigate]);
+
     const handleSubmit = async () => {
         try {
             await axios.post('http://localhost:3000/users/logout'); // Replace with your server URL
@@ -99,13 +100,16 @@ export default function Profile() {
                     {userPosts.length > 0 ? (
                         userPosts.map(post => (
                             <ListingCard
-                                key={post._id} 
+                                key={post._id}
+                                postId = {post._id}
                                 image={`${BACKEND_URL}${post.imagePaths[0].replace(/\\/g, '/')}`} // Assuming the first image in the array
+                                reviewerName = {name}
                                 title={post.title} 
                                 address={post.address}
                                 city = {post.city}
                                 state = {post.state}
                                 description={post.description}
+                                review = {post.review}
                             />
                         ))
                     ) : (
