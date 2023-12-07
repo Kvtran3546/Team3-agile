@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import "../css/EditProfile.css";
 
 function EditProfile() {
     const [username, setUsername] = useState('');
@@ -37,10 +38,10 @@ function EditProfile() {
     }
 
     return (
-        <div>
+        <div className='submitContainer'>
             <form onSubmit={handleSubmit}>
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <button type="submit">Save Changes</button>
+                <input type="text" value={username} className='fieldInput' onChange={(e) => setUsername(e.target.value)} />
+                <button type="submit" className='submitButton'>Save Changes</button>
             </form>
         </div>
     );
