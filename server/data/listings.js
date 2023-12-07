@@ -16,6 +16,7 @@ async function isValidFilePath(path) {
 	}
   }
 
+
 const createPost = async (title, address, city, state, description, imagePaths, userID) => {
 	title = helpers.isValidString(title, "Title");
 	address = helpers.isValidString(address, "Address");
@@ -167,7 +168,8 @@ const getPostsByUserId = async (userId) => {
     });
 };
 
-const addReview = async (id, userId, review) => {
+const addReview = async (id, userId, review, reviewerName) => {
+	reviewerName = helpers.isValidString(reviewerName, "reviewerName");
     if (!ObjectId.isValid(id) || !ObjectId.isValid(userId)) {
         throw new Error("Error: invalid user ID.");
     }
@@ -177,7 +179,8 @@ const addReview = async (id, userId, review) => {
 		{$push: {
 			reviews: {
 				userId: new ObjectId(userId),
-				review: review
+				review: review,
+				reviewerName: reviewerName
 			}
 		}},
 		{returnDocument: 'after'})
@@ -187,7 +190,21 @@ const addReview = async (id, userId, review) => {
 		return updatedListing;
 };
 
+const getReviewsByPostId = async (postId) => {
+    if (!ObjectId.isValid(postId)) {
+        throw new Error("Error: invalid post ID.");
+    }
+    const listingsCollection = await listings();
+    const post = await listingsCollection.findOne({ _id: new ObjectId(postId) }, { projection: { reviews: 1 } });
+    if (post === null) {
+        throw new Error("Error: no post found with the given ID.");
+    }
+    return post.reviews || []; // Return an empty array if there are no reviews
+};
+
+
 module.exports = {
+	getReviewsByPostId,
 	getPostsByUserId,
 	createPost,
 	getAll,

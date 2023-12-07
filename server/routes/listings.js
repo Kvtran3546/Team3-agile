@@ -71,16 +71,18 @@ router
 
 router
   .route('/submitreview')
-  .post(/*verifyUser,*/ async (req, res) => {
+  .post(verifyUser, async (req, res) => {
     try {
       let info = req.body;
-      if (!info.userId) throw "There needs to be a title";
-      if (!info.postId) throw "There needs to be an address";
-      if (!info.review) throw "There needs to be a city";
-      const userId = info.userId;
+      if (!req.userId) throw "There needs to be a userId";
+      if (!info.postId) throw "There needs to be an postId";
+      if (!info.review) throw "There needs to be a review";
+      if (!info.reviewerName) throw "There needs to be a reviewer name";
+      const userId = req.userId;
       const postId = info.postId;
       const review = info.review;
-      let output = await listings.addReview(postId, userId, review);
+      const reviewer = info.reviewerName;
+      let output = await listings.addReview(postId, userId, review, reviewer);
       if (output == null) {
         res.status(500).json({ error: "Internal Server Error" });
         return;
@@ -91,6 +93,16 @@ router
       res.status(400).json({ error: e });
     }
   })
+
+  router.get("/:id/reviews", async (req, res) => {
+    try {
+        console.log(req.params.id);
+        const reviews = await listings.getReviewsByPostId(req.params.id);
+        res.status(200).json(reviews);
+    } catch (e) {
+        res.status(404).json({ error: e.message });
+    }
+});
 
 router.get("/userposts", verifyUser, async (req, res) => {
   try {

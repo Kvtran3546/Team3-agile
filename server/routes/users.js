@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data");
 const users = data.users;
+const multer = require('multer');
 
 const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
@@ -142,5 +143,15 @@ router.patch("/profile/edit", verifyUser, async (req, res) => {
     res.status(400).json({ error: e });
   }
 });
+
+// router.post('/updateProfileImage', upload.single('profileImage'), async (req, res) => {
+//   try {
+//       // req.file contains information about the uploaded file
+//       // Update the user's profile image in the database using req.file.path
+//       res.status(200).json({ message: 'Profile image updated successfully' });
+//   } catch (error) {
+//       res.status(500).json({ error: error.message });
+//   }
+// });
 
 module.exports = router;
