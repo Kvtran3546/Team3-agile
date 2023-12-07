@@ -18,6 +18,19 @@ function SpotPage() {
   const [reviews, setReviews] = useState([]);
   const [review, setReview] = useState("");
   const data = useLocation().state;
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const BACKEND_URL = 'http://localhost:3000/';
+  const goToPrevious = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? data.images.length - 1 : prevIndex - 1
+    );
+  };
+  
+  const goToNext = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === data.images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
   useEffect(() => {
     console.log("Component mounted or updated");
     const response = axios
@@ -68,19 +81,23 @@ function SpotPage() {
     }
   };
   return (
-    <div className="flex flex-col w-full bg-[#E2E2E2] items-center">
+    <div className="flex flex-col w-full bg-[#E2E2E2] items-center h-screen">
       <div className="container">
         <h1 className="title_header">{data.title}</h1>
         <hr />
-        <div className="image_info">
-          <div className="img-container">
-            <img src={data.image} alt={data.title} />
-          </div>
-          <p className="ml-10">
-            <b>Address:</b> {data.address}, {data.city}, {data.state}
-            <br className="" />
-            <b>Description:</b> {data.description}
-          </p>
+        <div className="image_info mb-10">
+            <div className="img-container flex flex-col h-fit">
+                <img src={`${BACKEND_URL}${data.images[currentImageIndex].replace(/\\/g, '/')}`} alt={`${data.title}-${currentImageIndex}`} />
+                <div className="flex flex-row w-full justify-between mt-2 mb-2">
+                    <button onClick={goToPrevious} className="bg-[#02874D] p-1 rounded-md hover:bg-[#144e35]">Previous</button>
+                    <button onClick={goToNext} className="bg-[#02874D] p-1 rounded-md hover:bg-[#144e35]">Next</button>
+                </div>
+            </div>
+            <p className="ml-10">
+                <b>Address:</b> {data.address}, {data.city}, {data.state}
+                <br className="" />
+                <b>Description:</b> {data.description}
+            </p>
         </div>
         <hr />
         <div className="review_container flex flex-col">
@@ -100,7 +117,7 @@ function SpotPage() {
               placeholder="Write your review here"
               className="flex w-full px-10 mt-1 border-2 border-gray-300 rounded-md"
             />
-            <button type="submit">Submit Review</button>
+            <button type="submit" className="bg-[#02874D] p-1 rounded-md hover:bg-[#144e35] mt-2 mb-5">Submit Review</button>
           </form>
         </div>
       </div>

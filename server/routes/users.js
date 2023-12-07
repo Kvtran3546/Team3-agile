@@ -138,6 +138,25 @@ router.patch("/profile/edit", verifyUser, async (req, res) => {
     let info = req.body;
     if (!info.newName) throw "There needs to be a new name";
     const user = await users.editUser(req.userId, info.newName);
+    const updatedToken = jwt.sign(
+      {
+        name: info.newName,
+        id: req.userId,
+        email: req.email,
+        userDate: req.userDate
+      },
+      "Town_Treasures_Key",
+      { expiresIn: "1d" }
+    );
+
+    // Set the new token in the response
+    res.cookie("token", updatedToken, {
+      maxAge: 60 * 60 * 24 * 1000,
+      httpOnly: true,
+      secure: true,
+      path: "/",
+      sameSite: "none"
+    });
     res.status(200).json({ message: "Edit Successfully" });
   } catch (e) {
     res.status(400).json({ error: e });

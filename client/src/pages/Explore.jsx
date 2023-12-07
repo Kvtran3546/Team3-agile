@@ -153,7 +153,7 @@ const Explore = () => {
                   <ListingCard
                     key={post._id}
                     postId = {post._id}
-                    image={`${BACKEND_URL}${post.imagePaths[0].replace(/\\/g, '/')}`} // Assuming the first image in the array
+                    images={post.imagePaths} // Assuming the first image in the array
                     reviewerName = {name}
                     title={post.title} 
                     address={post.address}
