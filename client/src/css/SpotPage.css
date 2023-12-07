@@ -44,3 +44,18 @@ span {
     display : flex;
     flex-direction: row;
 }
+
+.img-container {
+    width: 500px; /* Set a fixed width */
+    height: 300px; /* Set a fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* To ensure no parts of the image overflow the container */
+}
+
+.img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* This makes sure the entire image fits within the container */
+}

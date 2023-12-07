@@ -64,7 +64,7 @@ export default function Profile() {
                 <img className="profileImage" src={"https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/420/420/Hat/Png"}/>
                 <h1>{name || 'username'}</h1>
                 <text style={{fontSize : 10}}>{"Joined Date : " + joinedDate || 'Joined Date'}</text>
-                <Link to={"/editprofile"} className="editProfileButton">Edit Profile</Link>
+                <Link to={"/editProfile"} className="editProfileButton">Edit Profile</Link>
             </div>
             <div className="linkList">
                 <h1 className="header">History</h1>
@@ -95,7 +95,7 @@ export default function Profile() {
             <div className="contentDisplay flex flex-col h-fit">
                 <h1 className="contentHeader">My Spots</h1>
                 <hr/>
-                <div className="contentDisplayContent h-fit flex flex-col justify-center items-center w-full py-5">
+                <div className="contentDisplayContent h-fit flex flex-wrap justify-center items-center w-full py-5">
                     {userPosts.length > 0 ? (
                         userPosts.map(post => (
                             <ListingCard

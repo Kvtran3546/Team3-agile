@@ -7,7 +7,7 @@ function EditProfile() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [auth, setAuth] = useState(false);
-
+    const navigate = useNavigate();
     useEffect(() =>  {
         axios.get('http://localhost:3000/users/',{ withCredentials: true })
         .then(res => {

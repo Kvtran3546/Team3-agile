@@ -17,7 +17,6 @@ async function isValidFilePath(path) {
   }
 
 const createPost = async (title, address, city, state, description, imagePaths, userID) => {
-	console.log("got in");
 	title = helpers.isValidString(title, "Title");
 	address = helpers.isValidString(address, "Address");
 	city = helpers.isValidString(city, "City");
@@ -32,6 +31,7 @@ const createPost = async (title, address, city, state, description, imagePaths, 
 	  // Validate each file path
 	  for (const path of imagePaths) {
 		const exists = await isValidFilePath(path);
+		console.log(path)
 		if (!exists) {
 		  throw new Error(`File does not exist at path: ${path}`);
 		}
@@ -47,7 +47,6 @@ const createPost = async (title, address, city, state, description, imagePaths, 
 	  userID: userID, // Store as an array,
 	  reviews: []
 	};
-	console.log(newListing);
 	const listingsCollection = await listings();
 	const insertInfo = await listingsCollection.insertOne(newListing);
 	if (!insertInfo.acknowledged || !insertInfo.insertedId) {

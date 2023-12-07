@@ -42,9 +42,11 @@ function SpotPage() {
             <h1 className='title_header'>{data.title}</h1>
             <hr/>
             <div className='image_info'>
-                <img src={data.image}/>
-                <p>
-                    <b>Address:</b> {data.address}, {data.city}, {data.state}<br/>
+                <div className='img-container'>
+                    <img src={data.image} alt={data.title} />
+                </div>
+                <p className='ml-10'>
+                    <b>Address:</b> {data.address}, {data.city}, {data.state}<br className=''/>
                     <b>Description:</b> {data.description}
                 </p>
             </div>

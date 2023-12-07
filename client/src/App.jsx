@@ -6,6 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import {
+  EditProfile,
   Home,
   Explore,
   Community,
@@ -86,6 +87,14 @@ function App() {
           element={
             <Layout>
               <SpotPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/editProfile"
+          element={
+            <Layout>
+              <EditProfile />
             </Layout>
           }
         />

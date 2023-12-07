@@ -39,7 +39,6 @@ router
   .route('/submitspot')
   .post(verifyUser, upload.array('images', 5), async (req, res) => {
     try {
-      console.log('Uploading');
       let info = req.body;
       const userID = req.userId;
       if (!userID) throw "User not authenticated";
@@ -59,7 +58,6 @@ router
         images.map(file => file.path), // Assuming you're storing paths or URLs
         userID
       );
-      console.log(output);
       if (output == null) {
         res.status(500).json({ error: "Internal Server Error" });
         return;
@@ -99,12 +97,10 @@ router
 router.get("/userposts", verifyUser, async (req, res) => {
   try {
     const userId = req.userId; // Get the user ID from the verified token
-    console.log(userId);
     if (!userId) {
       throw new Error("User ID is not available");
     }
     const userPosts = await listings.getPostsByUserId(userId);
-    console.log(userPosts);
     res.status(200).json(userPosts);
   } catch (e) {
     res.status(400).json({ error: e.message });
